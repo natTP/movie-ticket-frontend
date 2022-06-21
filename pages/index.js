@@ -1,16 +1,13 @@
-import Head from 'next/head'
-import Image from 'next/image'
+import Head from '../src/components/Head'
 
-export default function Home() {
+const Home = () => {
   return (
     <>
-      <Head>
-        <title>Cinema | โรงภาพยนตร์</title>
-        <meta name='home' content='browse movies' />
-        <link rel='icon' href='/favicon.ico' />
-      </Head>
+      <Head title='Cinema | โรงภาพยนตร์' name='home' content='browse movies' />
 
       <div>สวัสดีค่ะ</div>
     </>
   )
 }
+
+export default Home
