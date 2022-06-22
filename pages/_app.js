@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client'
-import client from '../src/configs/initApollo'
+import client from '../src/config/initApollo'
 import 'antd/dist/antd.css'
 import Layout from '../src/components/Layout'
 
