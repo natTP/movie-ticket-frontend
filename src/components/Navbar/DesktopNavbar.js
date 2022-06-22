@@ -1,30 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { LoginOutlined, MenuOutlined } from '@ant-design/icons'
+import { LoginOutlined } from '@ant-design/icons'
 import { Button, Layout, Divider, Space } from 'antd'
 import styled from 'styled-components'
 
 const { Header } = Layout
-
-// TODO : Responsive navbar is behaving weird because of Space ?
-
-const MenuToggle = styled(Button)`
-  display: none;
-  @media (max-width: 768px) {
-    display: inline;
-  } ;
-`
-
-const Menu = styled(({ isOpen, children, ...props }) => (
-  <Space {...props} direction={isOpen ? 'vertical' : 'horizontal'}>
-    {children}
-  </Space>
-))`
-  @media (max-width: 768px) {
-    width: 100%;
-    max-height: ${({ isOpen }) => (isOpen ? '100vh' : '0px')};
-  }
-`
 
 const StyledNavbar = styled(Header)`
   display: flex;
@@ -36,25 +16,15 @@ const StyledNavbar = styled(Header)`
   top: 0;
 
   background-color: #fff;
-
-  @media (max-width: 768px) {
-    align-items: center;
-  }
 `
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false)
-
+const DesktopNavbar = () => {
   return (
     <StyledNavbar>
-      <MenuToggle type='default' onClick={() => setIsOpen(!isOpen)}>
-        <MenuOutlined />
-      </MenuToggle>
-
-      <Menu split={<Divider type='vertical' />} isOpen={isOpen}>
+      <Space split={<Divider type='vertical' />}>
         <Link href='/'>ภาพยนตร์ทั้งหมด</Link>
         <Link href='/check'>ตรวจสอบรายละเอียดตั๋วภาพยนตร์</Link>
-      </Menu>
+      </Space>
 
       <Space>
         <Link href='/login'>
@@ -70,4 +40,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default DesktopNavbar
