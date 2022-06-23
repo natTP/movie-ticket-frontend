@@ -1,8 +1,14 @@
 import React from 'react'
-import { Button, Form, Input } from 'antd'
+import { Alert, Button, Form, Input, Spin } from 'antd'
+import styled from 'styled-components'
 import Link from 'next/link'
 
-const UserForm = ({ register, onFinish }) => {
+const SpinContainer = styled.div`
+  text-align: center;
+  padding-top: 1rem;
+`
+
+const UserForm = ({ register, onFinish, loading, error, data }) => {
   return (
     <Form
       name='register'
@@ -37,11 +43,34 @@ const UserForm = ({ register, onFinish }) => {
       >
         <Input placeholder='password' type='password' />
       </Form.Item>
+
       <Form.Item wrapperCol={{ sm: { offset: 7, span: 10 } }}>
         <Button type='primary' block htmlType='submit'>
           {register ? 'สมัครสมาชิก' : 'เข้าสู่ระบบ'}
         </Button>
+        {loading && (
+          <SpinContainer>
+            <Spin size='small' />
+          </SpinContainer>
+        )}
+        {error && (
+          <Alert
+            message={error.message}
+            type='error'
+            showIcon
+            style={{ marginTop: '0.5rem' }}
+          />
+        )}
+        {data && (
+          <Alert
+            message={`${register ? 'สมัครสมาชิก' : 'เข้าสู่ระบบ'}สำเร็จ`}
+            type='success'
+            showIcon
+            style={{ marginTop: '0.5rem' }}
+          />
+        )}
       </Form.Item>
+
       <Form.Item wrapperCol={{ sm: { offset: 7, span: 10 } }}>
         <Link href={register ? '/login' : '/register'}>
           <Button type='link' block htmlType='button'>
