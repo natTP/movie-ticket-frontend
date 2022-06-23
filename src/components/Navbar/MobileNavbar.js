@@ -1,11 +1,18 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { LoginOutlined, MenuOutlined } from '@ant-design/icons'
-import { Button, Layout, Divider, Space } from 'antd'
+import {
+  LoginOutlined,
+  LogoutOutlined,
+  UserOutlined,
+  MenuOutlined,
+} from '@ant-design/icons'
+import { Button, Layout, Divider, Space, Avatar, Typography } from 'antd'
 import styled from 'styled-components'
-import breakpoints from '../../../styles/breakpoints'
+import { useDispatch } from 'react-redux'
+import client from '../../config/initApollo'
 
 const { Header } = Layout
+const { Text } = Typography
 
 const MenuToggle = styled(Button)`
   display: inline;
@@ -31,8 +38,14 @@ const StyledNavbar = styled(Header)`
   background-color: #fff;
 `
 
-const MobileNavbar = () => {
+const MobileNavbar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const dispatch = useDispatch()
+
+  const onClick = () => {
+    dispatch({ type: 'logout' })
+    client.clearStore()
+  }
 
   return (
     <>
@@ -42,14 +55,22 @@ const MobileNavbar = () => {
         </MenuToggle>
 
         <Space size={1}>
-          <Link href='/login'>
-            <Button type='link' icon={<LoginOutlined />}>
-              เข้าสู่ระบบ
+          {user.token ? (
+            <Button type='default' icon={<LogoutOutlined />} onClick={onClick}>
+              ออกจากระบบ
             </Button>
-          </Link>
-          <Link href='/register'>
-            <Button type='primary'>สมัครสมาชิก</Button>
-          </Link>
+          ) : (
+            <>
+              <Link href='/login'>
+                <Button type='link' icon={<LoginOutlined />}>
+                  เข้าสู่ระบบ
+                </Button>
+              </Link>
+              <Link href='/register'>
+                <Button type='primary'>สมัครสมาชิก</Button>
+              </Link>
+            </>
+          )}
         </Space>
       </StyledNavbar>
 
@@ -62,6 +83,10 @@ const MobileNavbar = () => {
         >
           <Link href='/'>ภาพยนตร์ทั้งหมด</Link>
           <Link href='/check'>ตรวจสอบรายละเอียดตั๋วภาพยนตร์</Link>
+          <Space>
+            <Avatar size='small' icon={<UserOutlined />} />
+            <Text type='secondary'>{user.email}</Text>
+          </Space>
         </Menu>
       )}
     </>

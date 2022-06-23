@@ -5,13 +5,18 @@ const initialState = {
   token: null,
 }
 
-const register = createAction('register')
 const login = createAction('login')
+const logout = createAction('logout')
 
 const userReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(register, (state, action) => {
-      // state.name = action.payload
+    .addCase(login, (state, action) => {
+      state.email = action.payload.email
+      state.token = action.payload.token
+    })
+    .addCase(logout, (state, action) => {
+      state.email = null
+      state.token = null
     })
     .addDefaultCase((state, action) => {})
 })

@@ -1,10 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
-import { LoginOutlined } from '@ant-design/icons'
-import { Button, Layout, Divider, Space } from 'antd'
+import { LoginOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons'
+import { Button, Layout, Divider, Space, Avatar, Typography } from 'antd'
 import styled from 'styled-components'
+import { useDispatch } from 'react-redux'
+import client from '../../config/initApollo'
 
 const { Header } = Layout
+const { Text } = Typography
 
 const StyledNavbar = styled(Header)`
   display: flex;
@@ -18,7 +21,14 @@ const StyledNavbar = styled(Header)`
   background-color: #fff;
 `
 
-const DesktopNavbar = () => {
+const DesktopNavbar = ({ user }) => {
+  const dispatch = useDispatch()
+
+  const onClick = () => {
+    dispatch({ type: 'logout' })
+    client.clearStore()
+  }
+
   return (
     <StyledNavbar>
       <Space split={<Divider type='vertical' />}>
@@ -26,16 +36,28 @@ const DesktopNavbar = () => {
         <Link href='/check'>ตรวจสอบรายละเอียดตั๋วภาพยนตร์</Link>
       </Space>
 
-      <Space>
-        <Link href='/login'>
-          <Button type='link' icon={<LoginOutlined />}>
-            เข้าสู่ระบบ
+      {user.token ? (
+        <Space size='large'>
+          <Space>
+            <Avatar size='small' icon={<UserOutlined />} />
+            <Text type='secondary'>{user.email}</Text>
+          </Space>
+          <Button type='default' icon={<LogoutOutlined />} onClick={onClick}>
+            ออกจากระบบ
           </Button>
-        </Link>
-        <Link href='/register'>
-          <Button type='primary'>สมัครสมาชิก</Button>
-        </Link>
-      </Space>
+        </Space>
+      ) : (
+        <Space>
+          <Link href='/login'>
+            <Button type='link' icon={<LoginOutlined />}>
+              เข้าสู่ระบบ
+            </Button>
+          </Link>
+          <Link href='/register'>
+            <Button type='primary'>สมัครสมาชิก</Button>
+          </Link>
+        </Space>
+      )}
     </StyledNavbar>
   )
 }
