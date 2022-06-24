@@ -2,20 +2,21 @@ import React from 'react'
 import { Layout } from 'antd'
 import styled from 'styled-components'
 import Navbar from './Navbar'
+import breakpoints from '../../styles/breakpoints'
 
 const { Content, Footer } = Layout
 
 const StyledContent = styled(Content)`
   margin: auto;
-  padding: 4rem 2rem 0rem 2rem;
-  height: 100%;
+  padding: 4rem 2rem 4rem 2rem;
+  min-height: max-content;
   width: 100%;
-  max-width: 720px;
+  max-width: ${breakpoints.xl};
 `
 
 const MyLayout = ({ children }) => {
   return (
-    <Layout style={{ height: '100vh' }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <Navbar />
       <StyledContent>{children}</StyledContent>
       <Footer style={{ textAlign: 'center' }}>Cinema ©2022</Footer>

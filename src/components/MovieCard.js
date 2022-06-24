@@ -1,0 +1,39 @@
+import React from 'react'
+import { Card, Divider, Typography } from 'antd'
+import { ClockCircleOutlined } from '@ant-design/icons'
+import { blue } from '@ant-design/colors'
+import Image from 'next/image'
+import { formatDate } from '../utils/formatDateTime'
+
+const { Text, Title } = Typography
+
+const MovieCard = ({ movie }) => {
+  // _id, name, releaseDate, poster, genre, duration
+  return (
+    <Card
+      hoverable
+      cover={
+        <Image
+          src={movie.poster}
+          width='485px'
+          height='728px'
+          layout='responsive'
+        />
+      }
+    >
+      <Text style={{ color: blue.primary }}>
+        เข้าฉาย {formatDate(movie.releaseDate)}
+      </Text>
+      <Title level={4} style={{ marginTop: '0.5rem' }}>
+        {movie.name}
+      </Title>
+      <Text type='secondary'>
+        {movie.genre.join(' · ')}{' '}
+        <span style={{ margin: '0rem 0.25rem 0rem 0.25rem' }}>|</span>{' '}
+        <ClockCircleOutlined /> {movie.duration} นาที
+      </Text>
+    </Card>
+  )
+}
+
+export default MovieCard
