@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from '../src/redux/store'
 import { Spin } from 'antd'
+import AuthVerify from '../src/components/authVerify'
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -18,6 +19,7 @@ function MyApp({ Component, pageProps }) {
           <Layout>
             <Component {...pageProps} />
           </Layout>
+          <AuthVerify />
         </ApolloProvider>
       </PersistGate>
     </Provider>

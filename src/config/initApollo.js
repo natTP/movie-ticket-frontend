@@ -1,13 +1,13 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { getToken } from '../utils/jwtUtils'
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:8080/graphql',
 })
 
 const authLink = setContext((_, { headers }) => {
-  const data = JSON.parse(localStorage.getItem('persist:root'))
-  const { token } = JSON.parse(data.user)
+  const token = getToken()
   return {
     headers: {
       ...headers,
