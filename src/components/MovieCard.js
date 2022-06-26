@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Divider, Typography } from 'antd'
+import { Card, Typography } from 'antd'
 import { ClockCircleOutlined } from '@ant-design/icons'
 import { blue } from '@ant-design/colors'
 import Image from 'next/image'
@@ -13,6 +13,7 @@ const MovieCard = ({ movie }) => {
     <Link href={`/reserve/movie/${movie._id}`}>
       <Card
         hoverable
+        bordered={false}
         cover={
           <Image
             src={movie.poster}
@@ -21,6 +22,7 @@ const MovieCard = ({ movie }) => {
             layout='responsive'
           />
         }
+        style={{ height: '100%' }}
       >
         <Text style={{ color: blue.primary }}>
           เข้าฉาย {formatDate(movie.releaseDate)}
