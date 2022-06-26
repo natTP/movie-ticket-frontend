@@ -1,11 +1,12 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 import { useQuery } from '@apollo/client'
-import { Typography, Spin, Space } from 'antd'
+import { Typography, Spin, Space, DatePicker } from 'antd'
 import Head from '../../../src/components/Head'
 import ReservationSteps from '../../../src/components/ReservationSteps'
-import { GetMovieByIDQuery } from '../../../src/queries/movie'
+import { selectShowtimePageQuery } from '../../../src/queries/showtime'
 import MovieBanner from '../../../src/components/MovieBanner'
+import moment from 'moment'
 
 const { Title } = Typography
 
@@ -13,8 +14,8 @@ const SelectShowtimePage = () => {
   const router = useRouter()
   let { id } = router.query
 
-  const { loading, error, data } = useQuery(GetMovieByIDQuery, {
-    variables: { _id: id },
+  const { loading, error, data } = useQuery(selectShowtimePageQuery, {
+    variables: { movieID: id },
   })
 
   if (loading) return <Spin tip='กำลังโหลด...' size='large' />
@@ -26,8 +27,22 @@ const SelectShowtimePage = () => {
     )
 
   const movie = data.getMovieByID
+  const showtimes = data.getShowtimeListByMovie.data
 
-  // TODO : Show movie name in head
+  // TODO : restructure object to
+  // locations [ { theaters: [ {showtimes: []} ] }]
+  const theaters = []
+  const locations = []
+  showtimes.forEach((showtime) => {
+    // try querying mongo to get the data structure we want from backend
+  })
+
+  console.log(showtimes)
+
+  // const onChange = (date, dateString) => {
+  //   console.log(date, dateString)
+  // }
+
   return (
     <>
       <Head
@@ -39,6 +54,17 @@ const SelectShowtimePage = () => {
       <Space direction='vertical' size={32} style={{ width: '100%' }}>
         <ReservationSteps current={0} />
         <MovieBanner movie={movie} />
+        <div>
+          <Space size='large' align='start'>
+            <Title level={1}>รอบฉาย</Title>
+            <DatePicker
+              placeholder='วันที่'
+              defaultValue={moment()}
+              format='Do MMM YYYY'
+              style={{ padding: '0.5rem' }}
+            />
+          </Space>
+        </div>
       </Space>
     </>
   )
