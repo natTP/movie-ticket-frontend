@@ -1,0 +1,42 @@
+.seat {
+  height: 36px !important;
+  width: 36px !important;
+  color: #fff !important;
+  border-radius: 0px 0px 8px 0px !important;
+}
+
+.seat__number {
+  font-size: 14px !important;
+}
+
+.seat--north {
+  background-color: #13c2c2 !important;
+}
+
+.seat--south {
+  background-color: #08979c !important;
+}
+
+.seat--north.seat--enabled:hover {
+  background-color: #08979c !important;
+}
+.seat--south.seat--enabled:hover {
+  background-color: #006d75 !important;
+}
+
+.seat--selected {
+  cursor: pointer;
+  background-color: #7cb305 !important ;
+}
+
+.seat--reserved {
+  cursor: not-allowed;
+  background-color: #d9d9d9 !important;
+}
+
+.seat-content {
+  overflow: scroll !important;
+}
+.seat-picker {
+  margin: auto !important;
+}

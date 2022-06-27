@@ -7,6 +7,7 @@ import BackButton from '../../src/components/common/BackButton'
 import { useSelector } from 'react-redux'
 import { useQuery } from '@apollo/client'
 import { GetShowtimeByIDQuery } from '../../src/queries/showtime'
+import SeatPicker from '../../src/components/SeatPicker'
 
 const { Title } = Typography
 
@@ -26,10 +27,12 @@ const selectSeatPage = () => {
 
   const { movie, theater, dateTime, language } = data.getShowtimeByID
 
+  console.log(theater.seats)
+
   return (
     <>
       <Head
-        title={`เลือกที่นั่ง | movie.name`}
+        title={`เลือกที่นั่ง | ${movie.name}`}
         name='select showtime'
         content='select showtime'
       />
@@ -43,6 +46,7 @@ const selectSeatPage = () => {
           language={language}
           dateTime={dateTime}
         />
+        <SeatPicker seatTypes={theater.seats} />
       </Space>
     </>
   )

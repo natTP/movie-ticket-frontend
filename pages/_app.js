@@ -1,6 +1,7 @@
+import 'antd/dist/antd.css'
+import '../styles/SeatPicker.css'
 import { ApolloProvider } from '@apollo/client'
 import client from '../src/config/initApollo'
-import 'antd/dist/antd.css'
 import Layout from '../src/components/common/Layout'
 import AuthVerify from '../src/components/common/authVerify'
 import { Provider } from 'react-redux'
