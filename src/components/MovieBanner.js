@@ -16,7 +16,7 @@ const MovieBanner = ({ movie }) => {
           width='485px'
           height='728px'
           layout='responsive'
-          style={{ height: '100%' }}
+          priority
         />
       </Col>
       <Col xs={24} sm={18}>
