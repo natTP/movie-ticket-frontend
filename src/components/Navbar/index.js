@@ -13,8 +13,6 @@ const Navbar = () => {
         <Col xs={0} md={24}>
           <DesktopNavbar user={user} />
         </Col>
-      </Row>
-      <Row>
         <Col xs={24} md={0}>
           <MobileNavbar user={user} />
         </Col>
