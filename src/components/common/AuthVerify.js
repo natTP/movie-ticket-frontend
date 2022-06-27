@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { getToken, parseJWT } from '../utils/jwtUtils'
+import { getToken, parseJWT } from '../../utils/jwtUtils'
 import { useApolloClient } from '@apollo/client'
 
 const AuthVerify = () => {

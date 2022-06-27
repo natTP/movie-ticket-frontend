@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client'
 import { Typography } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
 import { RegisterMutation } from '../src/mutations/user'
-import Head from '../src/components/Head'
+import Head from '../src/components/common/Head'
 import UserForm from '../src/components/userForm'
 import { useRouter } from 'next/router'
 

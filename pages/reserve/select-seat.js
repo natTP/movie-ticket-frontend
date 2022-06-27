@@ -1,7 +1,7 @@
 import React from 'react'
 import { Space } from 'antd'
-import Head from '../../src/components/Head'
-import ReservationSteps from '../../src/components/ReservationSteps'
+import Head from '../../src/components/common/Head'
+import ReservationSteps from '../../src/components/common/ReservationSteps'
 import MovieBanner from '../../src/components/MovieBanner'
 
 const selectSeatPage = () => {

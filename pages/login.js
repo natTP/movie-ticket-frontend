@@ -1,5 +1,5 @@
-import Head from 'next/head'
 import { Typography } from 'antd'
+import Head from '../src/components/common/Head'
 import React from 'react'
 import UserForm from '../src/components/userForm'
 import { useMutation } from '@apollo/client'

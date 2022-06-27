@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from 'antd'
 import styled from 'styled-components'
 import Navbar from './Navbar'
-import breakpoints from '../../styles/breakpoints'
+import breakpoints from '../../../styles/breakpoints'
 
 const { Content, Footer } = Layout
 

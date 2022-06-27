@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { Col, Row, Typography, Spin } from 'antd'
-import Head from '../src/components/Head'
+import Head from '../src/components/common/Head'
 import MovieCard from '../src/components/MovieCard'
 import { GetMovieListQuery } from '../src/queries/movie'
 
