@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import moment from 'moment'
 import { useRouter } from 'next/router'
 import { useApolloClient, useQuery } from '@apollo/client'
-import { Typography, Spin, Space, DatePicker, Empty, Button } from 'antd'
+import { Typography, Spin, Space, DatePicker, Empty } from 'antd'
 import Head from '../../../src/components/common/Head'
 import ReservationSteps from '../../../src/components/common/ReservationSteps'
 import {
@@ -11,7 +11,7 @@ import {
 } from '../../../src/queries/showtime'
 import MovieBanner from '../../../src/components/MovieBanner'
 import TheaterCard from '../../../src/components/TheaterCard'
-import { LeftOutlined } from '@ant-design/icons'
+import BackButton from '../../../src/components/common/BackButton'
 
 const { Title } = Typography
 
@@ -67,7 +67,6 @@ const SelectShowtimePage = () => {
     }
   }
 
-  // TODO : Back button component
   return (
     <>
       <Head
@@ -77,8 +76,8 @@ const SelectShowtimePage = () => {
       />
 
       <Space direction='vertical' size={32} style={{ width: '100%' }}>
+        <BackButton />
         <ReservationSteps current={0} />
-        <Button icon={<LeftOutlined />}>กลับ</Button>
         <MovieBanner movie={movie} />
         <Space direction='vertical' size='small' style={{ width: '100%' }}>
           <Space size='large' align='start'>
@@ -93,7 +92,9 @@ const SelectShowtimePage = () => {
           {theaters.length === 0 ? (
             <Empty />
           ) : (
-            theaters.map((theater) => <TheaterCard theater={theater[1]} />)
+            theaters.map((theater) => (
+              <TheaterCard theater={theater[1]} key={theater[0]} />
+            ))
           )}
         </Space>
       </Space>

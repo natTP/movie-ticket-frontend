@@ -14,7 +14,7 @@ const TheaterCard = ({ theater }) => {
   }
 
   return (
-    <Card bordered={false} key={theater.theater._id}>
+    <Card bordered={false}>
       <Title level={4}>{theater.theater.location}</Title>
       <Row gutter={[8, 8]}>
         <Col xs={24} lg={2}>
