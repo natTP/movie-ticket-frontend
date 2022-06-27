@@ -1,11 +1,12 @@
 import { gql } from '@apollo/client'
 
-// TODO also get by date!!!
 export const getShowtimeListByMovieQuery = gql`
-  query ($movieID: ID!) {
-    getShowtimeListByMovie(movieID: $movieID) {
+  query getShowtimeListByMovieQuery($movieID: ID!, $dateString: String!) {
+    getShowtimeListByMovie(movieID: $movieID, dateString: $dateString) {
       data {
+        _id
         theater {
+          _id
           location
           name
         }
@@ -17,7 +18,7 @@ export const getShowtimeListByMovieQuery = gql`
 `
 
 export const GetShowtimeByIDQuery = gql`
-  query ($_id: ID!) {
+  query GetShowtimeByIDQuery($_id: ID!) {
     getShowtimeByID(_id: $_id) {
       movie {
         name
@@ -40,7 +41,7 @@ export const GetShowtimeByIDQuery = gql`
 `
 
 export const selectShowtimePageQuery = gql`
-  query ($movieID: ID!) {
+  query selectShowtimePageQuery($movieID: ID!, $dateString: String!) {
     getMovieByID(_id: $movieID) {
       name
       releaseDate
@@ -49,9 +50,11 @@ export const selectShowtimePageQuery = gql`
       genre
       synopsis
     }
-    getShowtimeListByMovie(movieID: $movieID) {
+    getShowtimeListByMovie(movieID: $movieID, dateString: $dateString) {
       data {
+        _id
         theater {
+          _id
           location
           name
         }

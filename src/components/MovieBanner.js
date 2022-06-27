@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Card, Col, Collapse, Row, Typography } from 'antd'
 import { blue } from '@ant-design/colors'
 import { ClockCircleOutlined } from '@ant-design/icons'
-import { formatDate } from '../utils/formatDateTime'
+import { formatDate } from '../utils/dateTimeUtils'
 
 const { Text, Title } = Typography
 

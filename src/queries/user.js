@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const CurrentUserQuery = gql`
-  query {
+  query CurrentUserQuery {
     me {
       _id
       email

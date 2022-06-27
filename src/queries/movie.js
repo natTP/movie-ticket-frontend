@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GetMovieListQuery = gql`
-  query {
+  query GetMovieListQuery {
     getMovieList {
       data {
         _id
@@ -16,7 +16,7 @@ export const GetMovieListQuery = gql`
 `
 
 export const GetMovieByIDQuery = gql`
-  query ($_id: ID!) {
+  query GetMovieByIDQuery($_id: ID!) {
     getMovieByID(_id: $_id) {
       name
       releaseDate
