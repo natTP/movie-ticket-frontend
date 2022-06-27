@@ -1,11 +1,12 @@
 import React from 'react'
-import client from '../config/initApollo'
 import { useDispatch } from 'react-redux'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { getToken, parseJWT } from '../utils/jwtUtils'
+import { useApolloClient } from '@apollo/client'
 
 const AuthVerify = () => {
+  const client = useApolloClient()
   const router = useRouter()
   const dispatch = useDispatch()
 

@@ -9,7 +9,7 @@ import {
 import { Button, Layout, Divider, Space, Avatar, Typography } from 'antd'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
-import client from '../../config/initApollo'
+import { useApolloClient } from '@apollo/client'
 
 const { Header } = Layout
 const { Text } = Typography
@@ -40,6 +40,7 @@ const StyledNavbar = styled(Header)`
 
 const MobileNavbar = ({ user }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const client = useApolloClient()
   const dispatch = useDispatch()
 
   const onClick = () => {
