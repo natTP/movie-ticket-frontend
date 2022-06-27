@@ -22,8 +22,10 @@ export const GetShowtimeByIDQuery = gql`
     getShowtimeByID(_id: $_id) {
       movie {
         name
+        releaseDate
         poster
         duration
+        genre
       }
       theater {
         location

@@ -1,13 +1,19 @@
 import React from 'react'
 import Image from 'next/image'
+import styled from 'styled-components'
 import { Card, Col, Collapse, Row, Typography } from 'antd'
 import { blue } from '@ant-design/colors'
 import { ClockCircleOutlined } from '@ant-design/icons'
-import { formatDate } from '../utils/dateTimeUtils'
+import { formatDate, ISOStringtoTime } from '../utils/dateTimeUtils'
+import InfoDisplay from './common/InfoDisplay'
 
 const { Text, Title } = Typography
 
-const MovieBanner = ({ movie }) => {
+const Container = styled.div`
+  margin-top: 2rem;
+`
+
+const MovieBanner = ({ movie, theater, language, dateTime, seats }) => {
   return (
     <Row>
       <Col xs={24} sm={6}>
@@ -30,17 +36,46 @@ const MovieBanner = ({ movie }) => {
           <Text type='secondary'>
             {movie.genre.join(' · ')}{' '}
             <span style={{ margin: '0rem 0.25rem 0rem 0.25rem' }}>|</span>{' '}
+            {language && (
+              <>
+                {language}{' '}
+                <span style={{ margin: '0rem 0.25rem 0rem 0.25rem' }}>|</span>{' '}
+              </>
+            )}
             <ClockCircleOutlined /> {movie.duration} นาที
           </Text>
-          <Collapse
-            bordered={false}
-            style={{ marginTop: '2rem' }}
-            defaultActiveKey={0}
-          >
-            <Collapse.Panel header='เรื่องย่อ'>
-              <Text>{movie.synopsis}</Text>
-            </Collapse.Panel>
-          </Collapse>
+
+          <Container>
+            {movie.synopsis && (
+              <Collapse
+                bordered={false}
+                style={{ marginTop: '2rem' }}
+                defaultActiveKey={0}
+              >
+                <Collapse.Panel header='เรื่องย่อ'>
+                  <Text>{movie.synopsis}</Text>
+                </Collapse.Panel>
+              </Collapse>
+            )}
+
+            {theater && (
+              <InfoDisplay
+                heading='โรงภาพยนตร์'
+                content={`${theater.location} - ${theater.name}`}
+              />
+            )}
+
+            {dateTime && (
+              <InfoDisplay
+                heading='รอบฉาย'
+                content={`${formatDate(dateTime)} เวลา ${ISOStringtoTime(
+                  dateTime
+                )} น.`}
+              />
+            )}
+
+            {seats && <InfoDisplay heading='ที่นั่ง' content={seats} />}
+          </Container>
         </Card>
       </Col>
     </Row>
