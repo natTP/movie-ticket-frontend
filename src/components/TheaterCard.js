@@ -2,16 +2,13 @@ import React from 'react'
 import { Typography, Row, Card, Button, Col } from 'antd'
 import { hasPassed, ISOStringtoTime } from '../utils/dateTimeUtils'
 import { useRouter } from 'next/router'
+import { useDispatch } from 'react-redux'
 
 const { Title, Text } = Typography
 
 const TheaterCard = ({ theater }) => {
   const router = useRouter()
-
-  const onClick = () => {
-    // TODO : Save reservation state into redux store
-    router.push('/reserve/select-seat')
-  }
+  const dispatch = useDispatch()
 
   return (
     <Card bordered={false}>
@@ -22,10 +19,21 @@ const TheaterCard = ({ theater }) => {
             {theater.theater.name} | {theater.language}
           </Text>
         </Col>
-        {theater.showtimes.map((showtime, i) => (
-          <Col key={i}>
-            <Button disabled={hasPassed(showtime)} onClick={onClick}>
-              {ISOStringtoTime(showtime)}
+        {theater.showtimes.map((showtime) => (
+          <Col key={showtime.id}>
+            <Button
+              disabled={hasPassed(showtime.dateTime)}
+              onClick={() => {
+                dispatch({
+                  type: 'select showtime',
+                  payload: {
+                    showtime: showtime.id,
+                  },
+                })
+                router.push('/reserve/select-seat')
+              }}
+            >
+              {ISOStringtoTime(showtime.dateTime)}
             </Button>
           </Col>
         ))}

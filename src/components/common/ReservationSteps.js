@@ -13,7 +13,7 @@ const ReservationSteps = ({ current }) => {
         </Steps>
       </Col>
       <Col xs={24} sm={0}>
-        <Progress percent={current + 1 * 25} showInfo={false} />
+        <Progress percent={(current + 1) * 25} showInfo={false} />
       </Col>
     </Row>
   )

@@ -43,13 +43,16 @@ const SelectShowtimePage = () => {
       const obj = theatersMap.get(theaterID)
       theatersMap.set(theaterID, {
         ...obj,
-        showtimes: [...obj.showtimes, item.dateTime].sort(),
+        showtimes: [
+          ...obj.showtimes,
+          { dateTime: item.dateTime, id: item._id },
+        ].sort(),
       })
     } else {
       theatersMap.set(theaterID, {
         theater: item.theater,
         language: item.language,
-        showtimes: [item.dateTime],
+        showtimes: [{ dateTime: item.dateTime, id: item._id }],
       })
     }
   })
