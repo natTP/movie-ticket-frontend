@@ -7,7 +7,7 @@ const InfoDisplay = ({ heading, content }) => {
   return (
     <Space direction='vertical' style={{ display: 'block', marginTop: '1rem' }}>
       <Text type='secondary'>{heading}</Text>
-      <Text style={{ fontSize: '1.25rem' }}>{content}</Text>
+      <Text style={{ fontSize: '1rem' }}>{content}</Text>
     </Space>
   )
 }

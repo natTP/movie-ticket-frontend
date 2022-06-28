@@ -14,19 +14,19 @@
 }
 
 .seat--south {
-  background-color: #08979c !important;
+  background-color: #faad14 !important;
 }
 
 .seat--north.seat--enabled:hover {
   background-color: #08979c !important;
 }
 .seat--south.seat--enabled:hover {
-  background-color: #006d75 !important;
+  background-color: #d48806 !important;
 }
 
 .seat--selected {
   cursor: pointer;
-  background-color: #7cb305 !important ;
+  background-color: #002329 !important ;
 }
 
 .seat--reserved {

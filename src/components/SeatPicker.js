@@ -1,16 +1,12 @@
-import { Space, Typography } from 'antd'
+import { Button, Card, Col, Divider, Row, Space, Typography } from 'antd'
+import { RightOutlined } from '@ant-design/icons'
 import React, { useState } from 'react'
 import Seatmap from 'react-seat-picker'
 import styled from 'styled-components'
+import SeatTypeDisplay from './SeatTypeDisplay'
+import InfoDisplay from './common/InfoDisplay'
 
 const { Text } = Typography
-
-const SeatIcon = styled.div`
-  width: 36px;
-  height: 36px;
-  border-radius: 0px 0px 8px 0px;
-  background-color: ${({ color }) => color};
-`
 
 const MovieScreen = styled.div`
   width: 50%;
@@ -43,14 +39,6 @@ const SeatPicker = ({ seatTypes }) => {
 
   return (
     <Space size='large' direction='vertical' style={{ width: '100%' }}>
-      <div>
-        {seatTypes.map((type) => (
-          <>
-            <SeatIcon color={'#fff'} />
-            <Text>{type.type}</Text>
-          </>
-        ))}
-      </div>
       <Seatmap
         rows={rows}
         alpha
@@ -58,6 +46,40 @@ const SeatPicker = ({ seatTypes }) => {
         maxReservableSeats={rows.length * rows[0].length}
       />
       <MovieScreen>จอภาพยนตร์</MovieScreen>
+
+      <Row
+        align='middle'
+        justify='center'
+        gutter={[0, 16]}
+        style={{ paddingLeft: '1.5rem' }}
+      >
+        <Col xs={24} sm={10}>
+          <Space direction='vertical'>
+            {seatTypes.map((type, idx) => (
+              <SeatTypeDisplay type={type} idx={idx} key={idx} />
+            ))}
+          </Space>
+        </Col>
+        <Col xs={0} sm={2}>
+          <Divider type='vertical' style={{ height: '100px' }} />
+        </Col>
+
+        <Col xs={24} sm={10}>
+          <Space direction='vertical'>
+            <InfoDisplay
+              heading='ที่นั่งที่เลือก'
+              content='A1 A2 A3 A1 A2 A3 A1 A2 A3 A1 A2 A3 A1 A2 A3 A1 A2 A3'
+            />
+            <InfoDisplay heading='ราคารวม' content='1000 บาท' />
+          </Space>
+        </Col>
+        <Col xs={22}>
+          <Button type='primary' block>
+            ดำเนินการต่อ
+            <RightOutlined />
+          </Button>
+        </Col>
+      </Row>
     </Space>
   )
 }
