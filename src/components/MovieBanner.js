@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 import styled from 'styled-components'
 import { Card, Col, Collapse, Row, Typography } from 'antd'
-import { blue } from '@ant-design/colors'
+import { cyan } from '@ant-design/colors'
 import { ClockCircleOutlined } from '@ant-design/icons'
 import { formatDate, ISOStringtoTime } from '../utils/dateTimeUtils'
 import InfoDisplay from './common/InfoDisplay'
@@ -23,11 +23,12 @@ const MovieBanner = ({ movie, theater, language, dateTime, seats }) => {
           height='728px'
           layout='responsive'
           priority
+          style={{ borderRadius: '16px' }}
         />
       </Col>
       <Col xs={24} sm={18}>
-        <Card bordered={false} style={{ height: '100%' }}>
-          <Text style={{ color: blue.primary }}>
+        <Card bordered={false} style={{ height: '100%', borderRadius: '16px' }}>
+          <Text style={{ color: cyan[5] }}>
             เข้าฉาย {formatDate(movie.releaseDate)}
           </Text>
           <Title level={2} style={{ marginTop: '0.25rem' }}>

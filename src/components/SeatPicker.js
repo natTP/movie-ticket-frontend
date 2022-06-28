@@ -73,7 +73,7 @@ const SeatPicker = ({ seatTypes }) => {
             <InfoDisplay heading='ราคารวม' content='1000 บาท' />
           </Space>
         </Col>
-        <Col xs={22}>
+        <Col xs={24} sm={22}>
           <Button type='primary' block>
             ดำเนินการต่อ
             <RightOutlined />
