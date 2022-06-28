@@ -36,6 +36,7 @@ export const GetShowtimeByIDQuery = gql`
           rows
         }
       }
+      reservedSeats
       dateTime
       language
     }

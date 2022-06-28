@@ -25,16 +25,15 @@ const selectSeatPage = () => {
       </Title>
     )
 
-  const { movie, theater, dateTime, language } = data.getShowtimeByID
-
-  console.log(theater.seats)
+  const { movie, theater, reservedSeats, dateTime, language } =
+    data.getShowtimeByID
 
   return (
     <>
       <Head
         title={`เลือกที่นั่ง | ${movie.name}`}
-        name='select showtime'
-        content='select showtime'
+        name='select seat'
+        content='select seat'
       />
 
       <Space direction='vertical' size={32} style={{ width: '100%' }}>
@@ -46,7 +45,7 @@ const selectSeatPage = () => {
           language={language}
           dateTime={dateTime}
         />
-        <SeatPicker seatTypes={theater.seats} />
+        <SeatPicker seatTypes={theater.seats} reservedSeats={reservedSeats} />
       </Space>
     </>
   )
