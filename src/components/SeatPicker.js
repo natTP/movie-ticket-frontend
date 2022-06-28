@@ -1,4 +1,4 @@
-import { Button, Card, Col, Divider, Row, Space, Typography } from 'antd'
+import { Button, Col, Divider, Row, Space } from 'antd'
 import { RightOutlined } from '@ant-design/icons'
 import React, { useState } from 'react'
 import Seatmap from 'react-seat-picker'
@@ -6,19 +6,23 @@ import styled from 'styled-components'
 import SeatTypeDisplay from './SeatTypeDisplay'
 import InfoDisplay from './common/InfoDisplay'
 import { useDispatch, useSelector } from 'react-redux'
-
-const { Text } = Typography
+import LoginModal from './LoginModal'
+import { useRouter } from 'next/router'
 
 const MovieScreen = styled.div`
   width: 50%;
   margin: auto;
   text-align: center;
+  border-radius: 4px;
   background-color: #fff;
 `
 
 const SeatPicker = ({ seatTypes, reservedSeats }) => {
   const [loading, setLoading] = useState(false)
+  const [isModalVisible, setIsModalVisible] = useState(false)
   const { seats, price } = useSelector((state) => state.reservation)
+  const { token } = useSelector((state) => state.user)
+  const router = useRouter()
   const dispatch = useDispatch()
 
   const rows = []
@@ -68,51 +72,65 @@ const SeatPicker = ({ seatTypes, reservedSeats }) => {
     setLoading(false)
   }
 
+  const onClick = () => {
+    if (!token) setIsModalVisible(true)
+    else router.push('/reserve/pay')
+  }
+
   return (
-    <Space size='large' direction='vertical' style={{ width: '100%' }}>
-      <Seatmap
-        addSeatCallback={addSeatCallback}
-        removeSeatCallback={removeSeatCallback}
-        selectedByDefault={true}
-        rows={rows}
-        loading={loading}
-        alpha
-        visible
-        maxReservableSeats={rows.length * rows[0].length}
+    <>
+      <LoginModal
+        visible={isModalVisible}
+        onCancel={() => setIsModalVisible(false)}
       />
-      <MovieScreen>จอภาพยนตร์</MovieScreen>
+      <Space size='large' direction='vertical' style={{ width: '100%' }}>
+        <Seatmap
+          addSeatCallback={addSeatCallback}
+          removeSeatCallback={removeSeatCallback}
+          selectedByDefault={true}
+          rows={rows}
+          loading={loading}
+          alpha
+          visible
+          maxReservableSeats={rows.length * rows[0].length}
+        />
+        <MovieScreen>จอภาพยนตร์</MovieScreen>
 
-      <Row
-        align='middle'
-        justify='center'
-        gutter={[0, 16]}
-        style={{ paddingLeft: '1.5rem' }}
-      >
-        <Col xs={24} sm={10}>
-          <Space direction='vertical'>
-            {seatTypes.map((type, idx) => (
-              <SeatTypeDisplay type={type} idx={idx} key={idx} />
-            ))}
-          </Space>
-        </Col>
-        <Col xs={0} sm={2}>
-          <Divider type='vertical' style={{ height: '100px' }} />
-        </Col>
+        <Row align='middle' justify='center' gutter={[0, 16]}>
+          <Col xs={24} sm={10}>
+            <Space direction='vertical'>
+              {seatTypes.map((type, idx) => (
+                <SeatTypeDisplay type={type} idx={idx} key={idx} />
+              ))}
+            </Space>
+          </Col>
+          <Col xs={0} sm={2}>
+            <Divider type='vertical' style={{ height: '100px' }} />
+          </Col>
 
-        <Col xs={24} sm={10}>
-          <Space direction='vertical'>
-            <InfoDisplay heading='ที่นั่งที่เลือก' content={seats.join(', ')} />
-            <InfoDisplay heading='ราคารวม' content={`${price} บาท`} />
-          </Space>
-        </Col>
-        <Col xs={24} sm={22}>
-          <Button type='primary' block disabled={seats.length === 0}>
-            ดำเนินการต่อ
-            <RightOutlined />
-          </Button>
-        </Col>
-      </Row>
-    </Space>
+          <Col xs={24} sm={10}>
+            <Space direction='vertical'>
+              <InfoDisplay
+                heading='ที่นั่งที่เลือก'
+                content={seats.join(', ')}
+              />
+              <InfoDisplay heading='ราคารวม' content={`${price} บาท`} />
+            </Space>
+          </Col>
+          <Col xs={24} sm={22}>
+            <Button
+              type='primary'
+              block
+              disabled={seats.length === 0}
+              onClick={onClick}
+            >
+              ดำเนินการต่อ
+              <RightOutlined />
+            </Button>
+          </Col>
+        </Row>
+      </Space>
+    </>
   )
 }
 
