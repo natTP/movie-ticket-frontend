@@ -46,7 +46,11 @@ const SelectShowtimePage = () => {
         showtimes: [
           ...obj.showtimes,
           { dateTime: item.dateTime, id: item._id },
-        ].sort(),
+        ].sort((a, b) => {
+          if (a.dateTime < b.dateTime) return -1
+          if (a.dateTime < b.dateTime) return 1
+          return 0
+        }),
       })
     } else {
       theatersMap.set(theaterID, {
