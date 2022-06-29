@@ -21,7 +21,7 @@ const SeatPicker = ({ seatTypes, reservedSeats }) => {
   const [loading, setLoading] = useState(false)
   const [isModalVisible, setIsModalVisible] = useState(false)
   const { seats, price } = useSelector((state) => state.reservation)
-  const { token } = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user)
   const router = useRouter()
   const dispatch = useDispatch()
 
@@ -73,7 +73,7 @@ const SeatPicker = ({ seatTypes, reservedSeats }) => {
   }
 
   const onClick = () => {
-    if (!token) setIsModalVisible(true)
+    if (!user.token) setIsModalVisible(true)
     else router.push('/reserve/pay')
   }
 

@@ -13,7 +13,7 @@ const Container = styled.div`
   margin-top: 2rem;
 `
 
-const MovieBanner = ({ movie, theater, language, dateTime, seats }) => {
+const MovieBanner = ({ movie, theater, language, dateTime, seats, price }) => {
   return (
     <Row>
       <Col xs={24} sm={6}>
@@ -75,7 +75,12 @@ const MovieBanner = ({ movie, theater, language, dateTime, seats }) => {
               />
             )}
 
-            {seats && <InfoDisplay heading='ที่นั่ง' content={seats} />}
+            {seats && (
+              <InfoDisplay heading='ที่นั่ง' content={seats.join(', ')} />
+            )}
+            {price && (
+              <InfoDisplay heading='ราคารวม' content={`${price} บาท`} />
+            )}
           </Container>
         </Card>
       </Col>
