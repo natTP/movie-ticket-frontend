@@ -17,6 +17,7 @@ export const GetReservationByIDQuery = gql`
           name
           location
         }
+        language
       }
       seats
       price
@@ -42,6 +43,7 @@ export const GetReservationListByUserQuery = gql`
             name
             location
           }
+          language
         }
         seats
         price

@@ -10,10 +10,18 @@ import InfoDisplay from './common/InfoDisplay'
 const { Text, Title } = Typography
 
 const Container = styled.div`
-  margin-top: 2rem;
+  margin-top: 1rem;
 `
 
-const MovieBanner = ({ movie, theater, language, dateTime, seats, price }) => {
+const MovieBanner = ({
+  movie,
+  theater,
+  language,
+  dateTime,
+  seats,
+  price,
+  refCode,
+}) => {
   return (
     <Row>
       <Col xs={24} sm={6}>
@@ -47,40 +55,50 @@ const MovieBanner = ({ movie, theater, language, dateTime, seats, price }) => {
           </Text>
 
           <Container>
-            {movie.synopsis && (
-              <Collapse
-                bordered={false}
-                style={{ marginTop: '2rem' }}
-                defaultActiveKey={0}
-              >
-                <Collapse.Panel header='เรื่องย่อ'>
-                  <Text>{movie.synopsis}</Text>
-                </Collapse.Panel>
-              </Collapse>
-            )}
+            <Row style={{ margin: 0 }}>
+              <Col xs={24} md={12}>
+                {movie.synopsis && (
+                  <Collapse
+                    bordered={false}
+                    style={{ marginTop: '2rem' }}
+                    defaultActiveKey={0}
+                  >
+                    <Collapse.Panel header='เรื่องย่อ'>
+                      <Text>{movie.synopsis}</Text>
+                    </Collapse.Panel>
+                  </Collapse>
+                )}
 
-            {theater && (
-              <InfoDisplay
-                heading='โรงภาพยนตร์'
-                content={`${theater.location} - ${theater.name}`}
-              />
-            )}
+                {theater && (
+                  <InfoDisplay
+                    heading='โรงภาพยนตร์'
+                    content={`${theater.location} - ${theater.name}`}
+                  />
+                )}
 
-            {dateTime && (
-              <InfoDisplay
-                heading='รอบฉาย'
-                content={`${formatDate(dateTime)} เวลา ${ISOStringtoTime(
-                  dateTime
-                )} น.`}
-              />
-            )}
+                {dateTime && (
+                  <InfoDisplay
+                    heading='รอบฉาย'
+                    content={`${formatDate(dateTime)} เวลา ${ISOStringtoTime(
+                      dateTime
+                    )} น.`}
+                  />
+                )}
 
-            {seats && (
-              <InfoDisplay heading='ที่นั่ง' content={seats.join(', ')} />
-            )}
-            {price && (
-              <InfoDisplay heading='ราคารวม' content={`${price} บาท`} />
-            )}
+                {seats && (
+                  <InfoDisplay heading='ที่นั่ง' content={seats.join(', ')} />
+                )}
+                {price && (
+                  <InfoDisplay heading='ราคารวม' content={`${price} บาท`} />
+                )}
+              </Col>
+
+              <Col xs={24} md={12}>
+                {refCode && (
+                  <InfoDisplay heading='Reference Code' content={refCode} />
+                )}
+              </Col>
+            </Row>
           </Container>
         </Card>
       </Col>

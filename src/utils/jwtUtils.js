@@ -7,7 +7,9 @@ export const parseJWT = (token) => {
 }
 
 export const getToken = () => {
-  const data = JSON.parse(localStorage.getItem('persist:root'))
-  const { token } = JSON.parse(data.user)
-  return token
+  if (typeof window !== 'undefined') {
+    const data = JSON.parse(localStorage.getItem('persist:root'))
+    const { token } = JSON.parse(data.user)
+    return token
+  }
 }
