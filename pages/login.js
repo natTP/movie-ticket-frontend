@@ -27,7 +27,11 @@ const LoginPage = () => {
       const { data } = await login({ variables: { input: values } })
       dispatch({
         type: 'login',
-        payload: { email: values.email, token: data.login.token },
+        payload: {
+          id: data.login._id,
+          email: values.email,
+          token: data.login.token,
+        },
       })
       router.back()
     } catch (error) {

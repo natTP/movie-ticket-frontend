@@ -27,7 +27,11 @@ const RegisterPage = () => {
       const { data } = await register({ variables: { input: values } })
       dispatch({
         type: 'login',
-        payload: { email: values.email, token: data.register.token },
+        payload: {
+          id: data.register._id,
+          email: values.email,
+          token: data.register.token,
+        },
       })
       router.back()
     } catch (error) {
