@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import moment from 'moment'
 import { useRouter } from 'next/router'
-import { useApolloClient, useQuery } from '@apollo/client'
+import { useApolloClient, useLazyQuery, useQuery } from '@apollo/client'
 import { Typography, Spin, Space, DatePicker, Empty } from 'antd'
 import Head from '../../../src/components/common/Head'
 import ReservationSteps from '../../../src/components/common/ReservationSteps'
+import { GetMovieByIDQuery } from '../../../src/queries/movie'
 import {
   selectShowtimePageQuery,
   getShowtimeListByMovieQuery,
@@ -12,16 +13,17 @@ import {
 import MovieBanner from '../../../src/components/MovieBanner'
 import TheaterCard from '../../../src/components/TheaterCard'
 import BackButton from '../../../src/components/common/BackButton'
+import client from '../../../src/config/initApollo'
 
 const { Title } = Typography
 
-const SelectShowtimePage = () => {
+const SelectShowtimePage = (props) => {
   const [date, setDate] = useState(moment().format('YYYY-MM-DD'))
   const client = useApolloClient()
   const router = useRouter()
   let { id } = router.query
 
-  const { loading, error, data } = useQuery(selectShowtimePageQuery, {
+  const { loading, error, data } = useQuery(getShowtimeListByMovieQuery, {
     variables: { movieID: id, dateString: date },
   })
 
@@ -33,7 +35,7 @@ const SelectShowtimePage = () => {
       </Title>
     )
 
-  const movie = data.getMovieByID
+  const movie = props.data.getMovieByID
   const theatersMap = new Map()
   const showtimes = data.getShowtimeListByMovie.data
 
@@ -107,6 +109,16 @@ const SelectShowtimePage = () => {
       </Space>
     </>
   )
+}
+
+export const getServerSideProps = async ({ query }) => {
+  const { data } = await client.query({
+    query: GetMovieByIDQuery,
+    variables: {
+      _id: query.id,
+    },
+  })
+  return { props: { data } }
 }
 
 export default SelectShowtimePage
