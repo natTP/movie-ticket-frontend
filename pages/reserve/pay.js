@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Typography, Spin, Space, Button } from 'antd'
 import Head from '../../src/components/common/Head'
 import ReservationSteps from '../../src/components/common/ReservationSteps'
@@ -13,6 +13,7 @@ import { CreateReservationMutation } from '../../src/mutations/reservation'
 const { Title } = Typography
 
 const PayPage = () => {
+  const [creating, setCreating] = useState(false)
   const [createReservation, createReservationStatus] = useMutation(
     CreateReservationMutation
   )
@@ -22,6 +23,10 @@ const PayPage = () => {
     variables: { _id: showtime },
   })
   const router = useRouter()
+
+  useEffect(() => {
+    console.log(creating)
+  }, [creating])
 
   if (!user.token)
     return (
@@ -43,6 +48,7 @@ const PayPage = () => {
 
   const onClick = async () => {
     try {
+      setCreating(true)
       const { data } = await createReservation({
         variables: {
           input: {
@@ -60,6 +66,7 @@ const PayPage = () => {
         },
         '/reserve/complete'
       )
+      setCreating(false)
     } catch (error) {
       console.log(error)
     }
@@ -73,6 +80,7 @@ const PayPage = () => {
         content='payment'
       />
 
+      {creating && <Spin tip='กำลังโหลด...' size='large' />}
       <Space direction='vertical' size={32} style={{ width: '100%' }}>
         <BackButton />
         <ReservationSteps current={2} />
