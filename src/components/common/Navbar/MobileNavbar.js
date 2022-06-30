@@ -6,11 +6,10 @@ import {
   UserOutlined,
   MenuOutlined,
 } from '@ant-design/icons'
-import { Button, Layout, Divider, Space, Avatar, Typography } from 'antd'
+import { Button, Layout, Divider, Space, Avatar, Typography, Affix } from 'antd'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { useApolloClient } from '@apollo/client'
-import { useRouter } from 'next/router'
 
 const { Header } = Layout
 const { Text } = Typography
@@ -51,30 +50,36 @@ const MobileNavbar = ({ user }) => {
 
   return (
     <>
-      <StyledNavbar>
-        <MenuToggle type='default' onClick={() => setIsOpen(!isOpen)}>
-          <MenuOutlined />
-        </MenuToggle>
+      <Affix>
+        <StyledNavbar>
+          <MenuToggle type='default' onClick={() => setIsOpen(!isOpen)}>
+            <MenuOutlined />
+          </MenuToggle>
 
-        <Space size={1}>
-          {user.token ? (
-            <Button type='default' icon={<LogoutOutlined />} onClick={onClick}>
-              ออกจากระบบ
-            </Button>
-          ) : (
-            <>
-              <Link href='/login'>
-                <Button type='link' icon={<LoginOutlined />}>
-                  เข้าสู่ระบบ
-                </Button>
-              </Link>
-              <Link href='/register'>
-                <Button type='primary'>สมัครสมาชิก</Button>
-              </Link>
-            </>
-          )}
-        </Space>
-      </StyledNavbar>
+          <Space size={1}>
+            {user.token ? (
+              <Button
+                type='default'
+                icon={<LogoutOutlined />}
+                onClick={onClick}
+              >
+                ออกจากระบบ
+              </Button>
+            ) : (
+              <>
+                <Link href='/login'>
+                  <Button type='link' icon={<LoginOutlined />}>
+                    เข้าสู่ระบบ
+                  </Button>
+                </Link>
+                <Link href='/register'>
+                  <Button type='primary'>สมัครสมาชิก</Button>
+                </Link>
+              </>
+            )}
+          </Space>
+        </StyledNavbar>
+      </Affix>
 
       {isOpen && (
         <Menu
@@ -92,10 +97,12 @@ const MobileNavbar = ({ user }) => {
           >
             ตรวจสอบรายละเอียดตั๋วภาพยนตร์
           </Link>
-          <Space>
-            <Avatar size='small' icon={<UserOutlined />} />
-            <Text type='secondary'>{user.email}</Text>
-          </Space>
+          {user.token && (
+            <Space>
+              <Avatar size='small' icon={<UserOutlined />} />
+              <Text type='secondary'>{user.email}</Text>
+            </Space>
+          )}
         </Menu>
       )}
     </>

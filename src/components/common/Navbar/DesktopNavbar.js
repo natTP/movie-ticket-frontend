@@ -5,7 +5,6 @@ import { Button, Layout, Divider, Space, Avatar, Typography } from 'antd'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { useApolloClient } from '@apollo/client'
-import { useRouter } from 'next/router'
 
 const { Header } = Layout
 const { Text } = Typography
