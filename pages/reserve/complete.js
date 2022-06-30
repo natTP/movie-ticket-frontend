@@ -36,7 +36,7 @@ const CompletePage = ({ data }) => {
           refCode={reservation._id}
         />
         <Alert
-          message='การจองสำเร็จแล้ว สามารถนำ Reference Code ไปใช้ค้นหาเพื่อตรวจสอบรายละเอียดภาพยนตร์'
+          message='การจองสำเร็จแล้ว สามารถนำ Reference Code ไปใช้ค้นหาเพื่อตรวจสอบรายละเอียดภาพยนตร์ได้ที่เมนูด้านบน'
           type='success'
           showIcon
         />
