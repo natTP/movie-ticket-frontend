@@ -15,6 +15,7 @@ const selectSeatPage = () => {
   const showtimeID = useSelector((state) => state.reservation.showtime)
   const { loading, error, data } = useQuery(GetShowtimeByIDQuery, {
     variables: { _id: showtimeID },
+    fetchPolicy: 'network-only',
   })
 
   if (loading) return <Spin tip='กำลังโหลด...' size='large' />
