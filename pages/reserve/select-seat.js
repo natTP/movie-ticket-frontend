@@ -11,7 +11,7 @@ import SeatPicker from '../../src/components/SeatPicker'
 
 const { Title } = Typography
 
-const selectSeatPage = () => {
+const SelectSeatPage = () => {
   const showtimeID = useSelector((state) => state.reservation.showtime)
   const { loading, error, data } = useQuery(GetShowtimeByIDQuery, {
     variables: { _id: showtimeID },
@@ -52,4 +52,4 @@ const selectSeatPage = () => {
   )
 }
 
-export default selectSeatPage
+export default SelectSeatPage

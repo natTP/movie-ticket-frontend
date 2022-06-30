@@ -26,7 +26,7 @@ const AuthVerify = () => {
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
     }
-  }, [])
+  }, [client, dispatch, router.events])
 
   return <></>
 }

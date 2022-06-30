@@ -27,6 +27,7 @@ const MovieBanner = ({
       <Col xs={24} sm={6}>
         <Image
           src={movie.poster}
+          alt={movie.name}
           width='485px'
           height='728px'
           layout='responsive'

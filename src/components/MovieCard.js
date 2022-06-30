@@ -17,6 +17,7 @@ const MovieCard = ({ movie }) => {
         cover={
           <Image
             src={movie.poster}
+            alt={movie.name}
             width='485px'
             height='728px'
             layout='responsive'

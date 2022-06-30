@@ -24,10 +24,6 @@ const PayPage = () => {
   })
   const router = useRouter()
 
-  useEffect(() => {
-    console.log(creating)
-  }, [creating])
-
   if (!user.token)
     return (
       <Title level={3} style={{ textAlign: 'center' }}>

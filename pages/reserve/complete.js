@@ -14,7 +14,7 @@ const CompletePage = ({ data }) => {
 
   useEffect(() => {
     dispatch({ type: 'clear reservation' })
-  }, [])
+  }, [dispatch])
 
   return (
     <>
