@@ -54,21 +54,21 @@ const MovieBanner = ({
             <ClockCircleOutlined /> {movie.duration} นาที
           </Text>
 
+          {movie.synopsis && (
+            <Collapse
+              bordered={false}
+              style={{ marginTop: '2rem' }}
+              defaultActiveKey={0}
+            >
+              <Collapse.Panel header='เรื่องย่อ'>
+                <Text>{movie.synopsis}</Text>
+              </Collapse.Panel>
+            </Collapse>
+          )}
+
           <Container>
             <Row style={{ margin: 0 }}>
               <Col xs={24} md={12}>
-                {movie.synopsis && (
-                  <Collapse
-                    bordered={false}
-                    style={{ marginTop: '2rem' }}
-                    defaultActiveKey={0}
-                  >
-                    <Collapse.Panel header='เรื่องย่อ'>
-                      <Text>{movie.synopsis}</Text>
-                    </Collapse.Panel>
-                  </Collapse>
-                )}
-
                 {theater && (
                   <InfoDisplay
                     heading='โรงภาพยนตร์'

@@ -5,14 +5,13 @@ import ReservationSteps from '../../src/components/common/ReservationSteps'
 import MovieBanner from '../../src/components/MovieBanner'
 import BackButton from '../../src/components/common/BackButton'
 import { GetShowtimeByIDQuery } from '../../src/queries/showtime'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useMutation, useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import { CreateReservationMutation } from '../../src/mutations/reservation'
 
 const { Title } = Typography
 
-// TODO get serverside props?
 const PayPage = () => {
   const [createReservation, createReservationStatus] = useMutation(
     CreateReservationMutation
@@ -22,7 +21,6 @@ const PayPage = () => {
   const { loading, error, data } = useQuery(GetShowtimeByIDQuery, {
     variables: { _id: showtime },
   })
-  const dispatch = useDispatch()
   const router = useRouter()
 
   if (!user.token)
@@ -55,7 +53,6 @@ const PayPage = () => {
           },
         },
       })
-      dispatch({ type: 'clear reservation' })
       router.push(`/reserve/complete/${data.createReservation.reservationID}`)
     } catch (error) {
       console.log(error)
