@@ -21,7 +21,10 @@ const CheckPage = (props) => {
   if (loading) return <Spin tip='กำลังโหลด...' size='large' />
 
   const onSearch = (value) => {
-    getReservationByID({ variables: { id: value } })
+    getReservationByID({
+      variables: { id: value },
+      fetchPolicy: 'network-only',
+    })
   }
 
   let reservation, reservationList
@@ -88,6 +91,7 @@ export const getServerSideProps = async ({ query }) => {
       variables: {
         userId: query.user,
       },
+      fetchPolicy: 'network-only',
     })
     return { props: { data } }
   }
