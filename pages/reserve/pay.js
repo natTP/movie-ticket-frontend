@@ -53,7 +53,13 @@ const PayPage = () => {
           },
         },
       })
-      router.push(`/reserve/complete/${data.createReservation.reservationID}`)
+      router.push(
+        {
+          pathname: '/reserve/complete',
+          query: { id: data.createReservation.reservationID },
+        },
+        '/reserve/complete'
+      )
     } catch (error) {
       console.log(error)
     }

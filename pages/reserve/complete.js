@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
-import client from '../../../src/config/initApollo'
+import client from '../../src/config/initApollo'
 import { Alert, Space, Button } from 'antd'
-import Head from '../../../src/components/common/Head'
-import ReservationSteps from '../../../src/components/common/ReservationSteps'
-import MovieBanner from '../../../src/components/MovieBanner'
-import { GetReservationByIDQuery } from '../../../src/queries/reservation'
+import Head from '../../src/components/common/Head'
+import ReservationSteps from '../../src/components/common/ReservationSteps'
+import MovieBanner from '../../src/components/MovieBanner'
+import { GetReservationByIDQuery } from '../../src/queries/reservation'
 import Link from 'next/link'
 import { useDispatch } from 'react-redux'
 
@@ -25,7 +25,7 @@ const CompletePage = ({ data }) => {
       />
 
       <Space direction='vertical' size={32} style={{ width: '100%' }}>
-        \ <ReservationSteps current={3} />
+        <ReservationSteps current={3} />
         <MovieBanner
           movie={reservation.showtime.movie}
           theater={reservation.showtime.theater}
@@ -54,7 +54,7 @@ export const getServerSideProps = async ({ query }) => {
   const { data } = await client.query({
     query: GetReservationByIDQuery,
     variables: {
-      id: query.reservationID,
+      id: query.id,
     },
   })
   return { props: { data } }

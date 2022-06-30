@@ -18,8 +18,6 @@ const CheckPage = () => {
     getReservationByID({ variables: { id: value } })
   }
 
-  const reservation = data.getReservationByID
-
   return (
     <>
       <Head
@@ -38,13 +36,13 @@ const CheckPage = () => {
         />
         {data ? (
           <MovieBanner
-            movie={reservation.showtime.movie}
-            theater={reservation.showtime.theater}
-            language={reservation.showtime.language}
-            dateTime={reservation.showtime.dateTime}
-            seats={reservation.seats}
-            price={reservation.price}
-            refCode={reservation._id}
+            movie={data.getReservationByID.showtime.movie}
+            theater={data.getReservationByID.showtime.theater}
+            language={data.getReservationByID.showtime.language}
+            dateTime={data.getReservationByID.showtime.dateTime}
+            seats={data.getReservationByID.seats}
+            price={data.getReservationByID.price}
+            refCode={data.getReservationByID._id}
           />
         ) : (
           <Empty />
