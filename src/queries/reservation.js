@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const GetReservationByIDQuery = gql`
-  query GetReservationList($id: ID!) {
+  query GetReservationLByID($id: ID!) {
     getReservationByID(_id: $id) {
       _id
       showtime {
