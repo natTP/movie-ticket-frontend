@@ -1,13 +1,19 @@
 import React from 'react'
-import { Typography, Input, Space, Spin, Empty } from 'antd'
+import { Typography, Input, Space, Spin, Empty, Divider } from 'antd'
 import Head from '../src/components/common/Head'
 import { useLazyQuery } from '@apollo/client'
-import { GetReservationByIDQuery } from '../src/queries/reservation'
+import {
+  GetReservationByIDQuery,
+  GetReservationListByUserQuery,
+} from '../src/queries/reservation'
 import MovieBanner from '../src/components/MovieBanner'
+import client from '../src/config/initApollo'
+import { useSelector } from 'react-redux'
 
 const { Title } = Typography
 
-const CheckPage = () => {
+const CheckPage = (props) => {
+  const user = useSelector((state) => state.user)
   const [getReservationByID, { loading, error, data }] = useLazyQuery(
     GetReservationByIDQuery
   )
@@ -17,6 +23,10 @@ const CheckPage = () => {
   const onSearch = (value) => {
     getReservationByID({ variables: { id: value } })
   }
+
+  let reservation, reservationList
+  if (props.data) reservationList = props.data.getReservationListByUser.data
+  if (data) reservation = data.getReservationByID
 
   return (
     <>
@@ -31,25 +41,57 @@ const CheckPage = () => {
           ตรวจสอบรายละเอียดตั๋วภาพยนตร์
         </Title>
         <Input.Search
-          placeholder='ค้นหาด้วย Reference code'
+          placeholder='ค้นหาด้วย Reference code...'
+          allowClear
           onSearch={onSearch}
         />
         {data ? (
           <MovieBanner
-            movie={data.getReservationByID.showtime.movie}
-            theater={data.getReservationByID.showtime.theater}
-            language={data.getReservationByID.showtime.language}
-            dateTime={data.getReservationByID.showtime.dateTime}
-            seats={data.getReservationByID.seats}
-            price={data.getReservationByID.price}
-            refCode={data.getReservationByID._id}
+            movie={reservation.showtime.movie}
+            theater={reservation.showtime.theater}
+            language={reservation.showtime.language}
+            dateTime={reservation.showtime.dateTime}
+            seats={reservation.seats}
+            price={reservation.price}
+            refCode={reservation._id}
           />
         ) : (
-          <Empty />
+          !props.data && <Empty />
+        )}
+        {user.token && props.data && (
+          <>
+            <Divider />
+            <Title level={3}>การจองของฉัน</Title>
+            {reservationList.map((reservation) => (
+              <MovieBanner
+                key={reservation._id}
+                movie={reservation.showtime.movie}
+                theater={reservation.showtime.theater}
+                language={reservation.showtime.language}
+                dateTime={reservation.showtime.dateTime}
+                seats={reservation.seats}
+                price={reservation.price}
+                refCode={reservation._id}
+              />
+            ))}
+          </>
         )}
       </Space>
     </>
   )
+}
+
+export const getServerSideProps = async ({ query }) => {
+  if (query.user) {
+    const { data } = await client.query({
+      query: GetReservationListByUserQuery,
+      variables: {
+        userId: query.user,
+      },
+    })
+    return { props: { data } }
+  }
+  return { props: {} }
 }
 
 export default CheckPage

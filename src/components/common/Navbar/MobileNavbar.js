@@ -10,6 +10,7 @@ import { Button, Layout, Divider, Space, Avatar, Typography } from 'antd'
 import styled from 'styled-components'
 import { useDispatch } from 'react-redux'
 import { useApolloClient } from '@apollo/client'
+import { useRouter } from 'next/router'
 
 const { Header } = Layout
 const { Text } = Typography
@@ -83,7 +84,14 @@ const MobileNavbar = ({ user }) => {
           }
         >
           <Link href='/'>ภาพยนตร์ทั้งหมด</Link>
-          <Link href='/check'>ตรวจสอบรายละเอียดตั๋วภาพยนตร์</Link>
+          <Link
+            href={{
+              pathname: '/check',
+              query: { user: user.id },
+            }}
+          >
+            ตรวจสอบรายละเอียดตั๋วภาพยนตร์
+          </Link>
           <Space>
             <Avatar size='small' icon={<UserOutlined />} />
             <Text type='secondary'>{user.email}</Text>
