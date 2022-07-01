@@ -1,34 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# movie-ticket-frontend
 
-## Getting Started
+Frontend for Movie Ticket Booking project, made with NextJS and Antdesign.
 
-First, run the development server:
+## Starting the server
 
-```bash
-npm run dev
-# or
-yarn dev
+1. Build at the root folder
+```
+yarn build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Run at the root folder to start server at `localhost:3004`.
+```
+yarn start
+```
+Or for quick preview on dev server, run
+```
+yarn dev
+```
+However, you will have to wait for compilation when navigating to a new page. The UX will differ from an actual production build.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+## Example Screenshots
+![Screen Shot 2565-07-01 at 18 34 35 (2)](https://user-images.githubusercontent.com/57129145/176887526-416726eb-5bb5-43bf-9021-a4000b9f886d.png)
+![Screen Shot 2565-07-01 at 18 34 18 (2)](https://user-images.githubusercontent.com/57129145/176887543-bc5f2853-94a6-434d-bb6d-4a664802c546.png)
+![Screen Shot 2565-07-01 at 18 36 53 (2)](https://user-images.githubusercontent.com/57129145/176887564-160ffd2f-6088-4168-819a-7685d0417821.png)
+![Screen Shot 2565-07-01 at 18 37 30 (2)](https://user-images.githubusercontent.com/57129145/176887721-68744ab7-36ce-4127-a802-18c7f88eb265.png)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## Additional Info
+See project requirements, architecture, schema and planning here: https://thinknet.atlassian.net/l/c/GumVoyHD
 
-## Learn More
+### Architecture
+![Screen Shot 2565-07-01 at 18 09 00](https://user-images.githubusercontent.com/57129145/176883498-24c46c12-8f20-41da-b1d7-fca576906f09.png)
 
-To learn more about Next.js, take a look at the following resources:
+### Schema
+![Screen Shot 2565-07-01 at 18 11 39](https://user-images.githubusercontent.com/57129145/176883801-80e43e37-cce1-474a-9522-248c8addce3e.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Related repositories
+- [Movie Ticket Frontend](https://github.com/natTP/movie-ticket-frontend) (This repo)
+- [Movie Ticket API Gateway](https://github.com/natTP/movie-ticket-api-gateway)
+- [Movie Ticket Service](https://github.com/natTP/movie-ticket-services)
