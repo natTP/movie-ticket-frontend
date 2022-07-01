@@ -42,7 +42,6 @@ const SeatPicker = ({ seatTypes, reservedSeats }) => {
       }
       rows.push(row)
     })
-    type = { ...type }
   })
 
   const getPrice = (row) => {
